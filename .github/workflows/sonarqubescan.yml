@@ -10,7 +10,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up JDK 17 # version 11 in the course was outdated and caused an error
+      - name: Set up JDK 17 # version 11 in the course was outdated and caused an error.
         uses: actions/setup-java@v2
         with:
           java-version: '17'
