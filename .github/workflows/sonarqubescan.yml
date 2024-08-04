@@ -10,10 +10,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up JDK 11
+      - name: Set up JDK 17 # version 11 in the course was outdated and caused an error
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'  # Ensure 'temurin' is the correct and supported distribution
           cache: maven  # This is correct for caching Maven packages
 
