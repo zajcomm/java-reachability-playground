@@ -1,4 +1,4 @@
-name: SonarQube Analysis & Unit Tests
+name: SonarQube Analysis
 
 on: push
 
@@ -10,21 +10,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up JDK 17
+      - name: Set up JDK 17 # version 11 in the course was outdated and caused an error
         uses: actions/setup-java@v2
         with:
           java-version: '17'
-          distribution: 'temurin'
-          cache: maven
+          distribution: 'temurin'  # Ensure 'temurin' is the correct and supported distribution
+          cache: maven  # This is correct for caching Maven packages
 
       - name: Build with Maven
-        run: mvn -B verify sonar:sonar -X -Dsonar.projectKey=zaj_project -Dsonar.organization=saas-zaj -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=zaj_project -Dsonar.organization=saas-zaj -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Upload Surefire Reports
-        uses: actions/upload-artifact@v2
-        with:
-          name: surefire-reports
-          path: target/surefire-reports
