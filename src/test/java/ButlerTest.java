@@ -14,6 +14,6 @@ public class ButlerTest {
 
         butler.welcome();
 
-        assertEquals("Expected output", "Hello World", outContent.toString().trim());
+        assertEquals("Hello World", outContent.toString().trim());
     }
 }
