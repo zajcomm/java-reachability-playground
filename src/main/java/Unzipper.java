@@ -1,17 +1,17 @@
-import org.nd4j.util.ArchiveUtils;
+import org.junit.Test;
+import static org.junit.Assert.*;
 import java.io.File;
 
-public class Unzipper {
-    public static void main(String[] args) throws Exception {
+public class UnzipperTest {
 
-        Butler butler = new Butler();
-        butler.welcome();
-        // https://app.snyk.io/vuln/SNYK-JAVA-ORGND4J-72550
-        // should appear as Reachable
-        ArchiveUtils.unzipFileTo("./malicious_file.zip", "./unzipped/");
+    @Test
+    public void testMain() throws Exception {
+        // Call the main method of Unzipper
+        String[] args = {};
+        Unzipper.main(args);
+
+        // Check if the malicious file is created
         File f = new File("/tmp/evil.txt");
-        if (f.exists()) {
-            throw new Exception("Malicious file /tmp/evil.txt was created");
-        };
+        assertFalse("Malicious file should not exist", f.exists());
     }
 }
